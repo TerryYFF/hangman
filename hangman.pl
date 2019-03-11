@@ -60,16 +60,16 @@ print("The length of the dictionary is ", $length, " words. \n");
 
 # Choose the target word
 $word_index = int(rand($length));
+<<<<<<< HEAD
 #print($word_index, "\n");
 $word = $dict[$word_index];
 #print("The target word is ", $word, "\n");
+=======
+$word = @dict[$word_index];
+>>>>>>> 5c70c46f45e890d9645d4b301cec180df514e4e8
 @word_list = split(//, $word);
 $word_length = @word_list;
-#print("The length of the word is ", $word_length, "\n");
-#print(@word_list, "\n");
-
-#splice(@word_list, 2, 1);
-#print(@word_list, "\n");
+#print("The target word is ", @word_list, "\n");
 
 
 my $guess;
@@ -82,6 +82,7 @@ $guess = "_" x $word_length;
 @guess_list = split(//, $guess);
 print(@guess_list, "\n");
 
+<<<<<<< HEAD
 my $count = 0;
 my $match = 0;
 my $win = 0;
@@ -90,14 +91,23 @@ my @guesses;
 until ($count == 6 || $win == 1) {
 	&hangmanDisplay();
 	print("These are the letters you have guessed: @guesses\n");
+=======
+$count = 0;
+$match = 0;
+$win = 0;
+@letters_guessed;
+until ($count == 6 || $win == 1) {
+	@letters_guessed = sort(@letters_guessed);
+	print("These are the letters you have guessed: @letters_guessed\n");
+>>>>>>> 5c70c46f45e890d9645d4b301cec180df514e4e8
 	print("Please pick a letter: ");
 	$letter = <STDIN>;
 	print("\n");
 	chop($letter);
-	if (&check_guessed($letter, join("", @guesses))){
+	if (&check_guessed($letter, join("", @letters_guessed))){
 		print("The letter you entered had been guessed before.\n")
 	} else {
-		push(@guesses, $letter);
+		push(@letters_guessed, $letter);
 		for ($i = 0; $i < $word_length; $i++){
 			if ($letter eq $word_list[$i]){
 				splice(@guess_list, $i, 1, $letter);
@@ -143,11 +153,19 @@ sub init_dict {
 
 # Check if a letter has already been guessed
 sub check_guessed {
+<<<<<<< HEAD
 	@guesses = split(//, $_[1]);
 	$one = @guesses;
 	$guessed = 0;
 	for ($i = 0; $i < $one; $i++) {
 		if ($_[0] eq $guesses[$i]) {
+=======
+	@letters_guessed = split(//, $_[1]);
+	$l = @letters_guessed;
+	$guessed = 0;
+	for ($i = 0; $i < $l; $i++){
+		if ($_[0] eq @letters_guessed[$i]) {
+>>>>>>> 5c70c46f45e890d9645d4b301cec180df514e4e8
 			$guessed = 1;
 		}
 	}
