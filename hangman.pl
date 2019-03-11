@@ -2,6 +2,26 @@ use Tk;
 use strict;
 use warnings;
 
+my @dict;
+my $length;
+my $word_index;
+my $word;
+my @word_list;
+my $word_length;
+my $guess;
+my @guess_list;
+my $letter;
+my $i;
+my $count = 0;
+my $match = 0;
+my $win = 0;
+my @letters_guessed;
+our @words;
+my $guessed;
+my $one;
+
+
+
 #GUI Window. Must have TK.
 # info about TK
 # https://www.ibm.com/developerworks/aix/library/au-perltkmodule/index.html
@@ -11,6 +31,7 @@ use warnings;
 my $nmbr = 1;
 
 my $mw = MainWindow->new;
+my $game;
 $mw->geometry("500x500");
 $mw->title("Hangman!!!");
 
@@ -19,17 +40,16 @@ $mw->Label(-text => 'Do you want to play hangman?')->pack();
 my $button1 = $mw->Button(-text => "Yes", -command => \&button1_sub)->pack(); #Yes Button.
 my $button2 = $mw->Button(-text => "No", -command => \&button2_sub)->pack(); #No Button.
 
-$mw->Button(
-		-text => 'Print',
-		-command => sub{do_print($nmbr);}
-		)->pack;
-
-
 sub button1_sub {
-	$mw->geometry("500x500");
-	$mw->title("Hangman");
-	$mw->Label(-text => 'Guess the Letter')->pack();
-	$mw->Entry(-background => 'black', -foreground => 'white')->pack(-side => "top");
+	$game = MainWindow -> new;
+	$game->title("Sub Window #1");
+	$game->geometry("500x500");
+	$game->title("Hangman");
+	$game->Label(-text => "@guess_list")->pack();
+	$game->Label(-text => "@word_list")->pack();
+	$game->Label(-text => "Guess the Letter")->pack();
+	$game->Entry(-background => 'black', -foreground => 'white')->pack(-side => "top");
+	my $A = $game->Button(-text => "A", -command => \&letterA)->pack();
 }
 
 sub button2_sub {
@@ -44,15 +64,13 @@ sub button2_sub {
   }
 }
 
+sub letterA{
+	$game->label("YAS ITS AN A");
+}
+
 
 #! /usr/bin/perl
 # Initiate the dictionary
-my @dict;
-my $length;
-my $word_index;
-my $word;
-my @word_list;
-my $word_length;
 
 @dict = &init_dict;
 $length = @dict;
@@ -65,22 +83,11 @@ $word = @dict[$word_index];
 $word_length = @word_list;
 #print("The target word is ", @word_list, "\n");
 
-
-my $guess;
-my @guess_list;
-my $letter;
-my $i;
-
-
 $guess = "_" x $word_length;
 @guess_list = split(//, $guess);
 print(@guess_list, "\n");
 
 
-my $count = 0;
-my $match = 0;
-my $win = 0;
-my @letters_guessed;
 
 until ($count == 6 || $win == 1) {
 	&hangmanDisplay();
@@ -119,10 +126,6 @@ if ($win == 1){
 	print("The correct word is: ", $word, "\n");
 }
 
-
-our @words;
-my $guessed;
-my $one;
 
 # Intialize the dictionary
 sub init_dict {
@@ -254,7 +257,7 @@ MainLoop;
 
 
 
-#This is not implemented. This only runs through dictionary and reads how many lines, charaters, and words there are. 
+#This is not implemented. This only runs through dictionary and reads how many lines, charaters, and words there are.
 
 
 
