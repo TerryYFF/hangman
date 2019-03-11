@@ -252,5 +252,36 @@ sub hangman7Display {
 MainLoop;
 
 
+
+
+#This is not implemented. This only runs through dictionary and reads how many lines, charaters, and words there are. 
+
+
+
+open(FILE, "dictionary.txt") or die "Could not open file: $!";
+
+my ($lines, $words, $chars) = (0,0,0);
+
+while (<FILE>) {
+    $lines++;
+    $chars += length($_);
+    $words += scalar(split(/\s+/, $_));
+}
+
+print("lines=$lines words=$words chars=$chars\n");
+
+
+open(FILE, "dictionary.txt") or die "Could not open file: $!";
+
+my @Checking = <FILE>;
+close FILE;
+print ("lines = $lines\n");
+my $random = (rand($lines));
+print ("Random number = $random\n");
+print $Checking[$random];
+
+# https://stackoverflow.com/questions/782087/how-do-i-count-the-characters-words-and-lines-in-a-file-using-perl
+
+
 #hashtable
 #tree
