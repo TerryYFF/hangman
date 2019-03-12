@@ -40,18 +40,22 @@ $mw->Label(-text => 'Do you want to play hangman?')->pack();
 my $button1 = $mw->Button(-text => "Yes", -command => \&button1_sub)->pack(); #Yes Button.
 my $button2 = $mw->Button(-text => "No", -command => \&button2_sub)->pack(); #No Button.
 
+
+# Window that pops up after you press Yes
 sub button1_sub {
 	$game = MainWindow -> new;
 	$game->title("Sub Window #1");
 	$game->geometry("500x500");
 	$game->title("Hangman");
 	$game->Label(-text => "@guess_list")->pack();
-	$game->Label(-text => "@word_list")->pack();
+	$game->Label(-text => "These are the letters you have guessed: @letters_guessed")->pack();
 	$game->Label(-text => "Guess the Letter")->pack();
 	$game->Entry(-background => 'black', -foreground => 'white')->pack(-side => "top");
 	my $A = $game->Button(-text => "A", -command => \&letterA)->pack();
 }
 
+
+# Window that pops after you press No
 sub button2_sub {
   my $yesno_button = $mw->messageBox(-message => "Are you sure you don't want to play?",
                                         -type => "yesno", -icon => "question");
@@ -64,8 +68,9 @@ sub button2_sub {
   }
 }
 
+# Letter A button
 sub letterA{
-	$game->label("YAS ITS AN A");
+	@letters_guessed = "a";
 }
 
 
@@ -251,10 +256,7 @@ sub hangman7Display {
         print "--|----\n";
 	}
 
-
-MainLoop;
-
-
+	MainLoop;
 
 
 #This is not implemented. This only runs through dictionary and reads how many lines, charaters, and words there are.
