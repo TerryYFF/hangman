@@ -77,13 +77,20 @@ sub letterA{
 #! /usr/bin/perl
 # Initiate the dictionary
 
-@dict = &init_dict;
-$length = @dict;
-print("The length of the dictionary is ", $length, " words. \n");
+#@dict = &init_dict;
+#$length = @dict;
+#print("The length of the dictionary is ", $length, " words. \n");
+
+my $size = `wc -l dictionary.txt`;
+$size =~ s/\D//g;
+print("The size of the file is $size\n");
 
 # Choose the target word
-$word_index = int(rand($length));
-$word = @dict[$word_index];
+$word_index = int(rand($size));
+#$word = @dict[$word_index];
+$word = &fetch_word($word_index);
+chop($word);
+chop($word);
 @word_list = split(//, $word);
 $word_length = @word_list;
 #print("The target word is ", @word_list, "\n");
@@ -131,6 +138,16 @@ if ($win == 1){
 	print("The correct word is: ", $word, "\n");
 }
 
+sub fetch_word {
+	open(DICT, "dictionary.txt") or die "Could not open file: $!";
+	my $target = <DICT>;
+	my $counter = 0;
+	until ($counter == $_[0]){
+		$target = <DICT>;
+		$counter ++;
+	}
+	$target;
+}
 
 # Intialize the dictionary
 sub init_dict {
