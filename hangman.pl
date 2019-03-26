@@ -10,7 +10,7 @@ my $word_length;
 my $guess;
 my $letter;
 my $i;
-my $count = 0;
+my $count = 1;
 my $match = 0;
 my $win = 0;
 my @letters_guessed;
@@ -42,10 +42,10 @@ my @letters_guessed;
 # https://www.perl.com/pub/2001/03/gui.html/
 # https://docstore.mik.ua/orelly/perl3/tk/ch01_04.htm
 
-my $mw;
 my $game;
 my $GuessList;
 my $LettersGuessed;
+my $hangmanDisplay;
 
 # sub GUI {
 # 	$mw = MainWindow->new;
@@ -65,12 +65,37 @@ sub GUI {
 	$game->geometry("500x500");
 	$game->title("Hangman");
 	$GuessList = $game->Label(-text => "$guess")->pack();
+	my $canvas = $game->Canvas(-relief => "sunken", -background => "blue");
+	$canvas->createOval(30, 80, 100, 150, -fill => "red");
+
+	$canvas -> pack();
 	$LettersGuessed = $game->Label(-text => "Letters Guessed: @letters_guessed")->pack();
 	my $A = $game->Button(-text => "A", -command => [\&letter, 'a'])->pack(-side => 'left');
 	my $B = $game->Button(-text => "B", -command => [\&letter, 'b'])->pack(-side => 'left');
 	my $C = $game->Button(-text => "C", -command => [\&letter, 'c'])->pack(-side => 'left');
 	my $D = $game->Button(-text => "D", -command => [\&letter, 'd'])->pack(-side => 'left');
 	my $E = $game->Button(-text => "E", -command => [\&letter, 'e'])->pack(-side => 'left');
+	my $F = $game->Button(-text => "F", -command => [\&letter, 'f'])->pack(-side => 'left');
+	my $G = $game->Button(-text => "G", -command => [\&letter, 'g'])->pack(-side => 'left');
+	my $H = $game->Button(-text => "H", -command => [\&letter, 'h'])->pack(-side => 'left');
+	my $I = $game->Button(-text => "I", -command => [\&letter, 'i'])->pack(-side => 'left');
+	my $J = $game->Button(-text => "J", -command => [\&letter, 'j'])->pack(-side => 'left');
+	my $K = $game->Button(-text => "K", -command => [\&letter, 'k'])->pack(-side => 'left');
+	my $L = $game->Button(-text => "L", -command => [\&letter, 'l'])->pack(-side => 'left');
+	my $M = $game->Button(-text => "M", -command => [\&letter, 'm'])->pack(-side => 'left');
+	my $N = $game->Button(-text => "N", -command => [\&letter, 'n'])->pack(-side => 'left');
+	my $O = $game->Button(-text => "O", -command => [\&letter, 'o'])->pack(-side => 'left');
+	my $P = $game->Button(-text => "P", -command => [\&letter, 'p'])->pack(-side => 'left');
+	my $Q = $game->Button(-text => "Q", -command => [\&letter, 'q'])->pack(-side => 'left');
+	my $R = $game->Button(-text => "R", -command => [\&letter, 'r'])->pack(-side => 'left');
+	my $S = $game->Button(-text => "S", -command => [\&letter, 's'])->pack(-side => 'left');
+	my $T = $game->Button(-text => "T", -command => [\&letter, 't'])->pack(-side => 'left');
+	my $U = $game->Button(-text => "U", -command => [\&letter, 'u'])->pack(-side => 'left');
+	my $V = $game->Button(-text => "V", -command => [\&letter, 'v'])->pack(-side => 'left');
+	my $W = $game->Button(-text => "W", -command => [\&letter, 'w'])->pack(-side => 'left');
+	my $X = $game->Button(-text => "Y", -command => [\&letter, 'y'])->pack(-side => 'left');
+	my $Y = $game->Button(-text => "X", -command => [\&letter, 'x'])->pack(-side => 'left');
+	my $Z = $game->Button(-text => "Z", -command => [\&letter, 'z'])->pack(-side => 'left');
 }
 
 
@@ -306,4 +331,3 @@ sub hangman7Display {
 	}
 
 	MainLoop;
-
