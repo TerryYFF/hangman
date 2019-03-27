@@ -29,6 +29,8 @@ my $LettersGuessed;
 my $hangmanDisplay;
 my $DisplayHangman;
 my $canvas;
+my $CounterLabel;
+my $MatchLabel;
 
 $mw = MainWindow -> new;
 $mw->geometry("500x500");
@@ -46,6 +48,8 @@ sub GUI {
 	$LettersGuessed = $mw->Label(-text => "Letters Guessed: @letters_guessed")->pack();
 
 	$GuessList = $mw->Label(-text => "$guess")->pack();
+
+	$CounterLabel = $mw->Label(-text => "Count: $count")->pack();
 
 	$canvas = $mw->Canvas(-relief => "sunken", -background => "blue");
 	$canvas->pack();
@@ -92,12 +96,14 @@ sub GUI {
 sub letter{
 	$letter = $_[0];
 	&CheckLetter();
+	&hangmanDisplay();
 }
 
 sub CheckLetter {
 	if (&check_guessed($letter, join("", @letters_guessed))){
 		$LettersGuessed -> configure(-text => "Letters Guessed: @letters_guessed");
 		$GuessList -> configure(-text => "$guess");
+		$CounterLabel -> configure(-text => "Count: $count");
 	} else {
 		push(@letters_guessed, $letter);
 		@letters_guessed = sort(@letters_guessed);
@@ -117,6 +123,7 @@ sub CheckLetter {
 		if ($match == 0) {
 			$count++;
 		}
+		$CounterLabel -> configure(-text => "Count: $count");
 		$match = 0;
 		if ($word eq $guess){
 			$win = 1;
@@ -129,7 +136,7 @@ sub hangmanDisplay{
   	$canvas->createRectangle(30, 80, 100, 150, -fill => "yellow");
   	print "count is $count\n";
 	} elsif ($count == 1) {
-  	$canvas->createRectangle(100, 30, 200, 50, -fill => "cyan");
+  	$canvas->createRectangle(100, 30, 200, 50, -fill => "red");
   	print "count is $count\n";
 	} elsif ($count == 2) {
   	$canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
@@ -144,8 +151,8 @@ sub hangmanDisplay{
 		$canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
 		print "count is $count\n";
 	} elsif ($count == 6) {
-	  	$canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
-	  	print "count is $count\n";
+	  $canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
+	  print "count is $count\n";
 	}
 }
 
