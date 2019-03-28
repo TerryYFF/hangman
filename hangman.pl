@@ -47,18 +47,6 @@ $canvas->createRectangle(190, 40, 200, 20, -fill => "brown");
 $canvas->createRectangle(10, 240, 370, 260, -fill => "brown");
 
 
-
-
-
-
-
-
-$canvas->createOval(170, 40, 220, 90, -fill => "black");
-$canvas->createOval(175, 45, 215, 85, -fill => "white");
-$canvas->createRectangle(190, 90, 200, 170, -fill => "black");
-
-
-
 #! /usr/bin/perl
 # Initiate the dictionary
 # my $size = `wc -l dictionary.txt`;
@@ -153,27 +141,19 @@ sub CheckLetter {
 }
 
 sub hangmanDisplay{
-  if ($count == 0) {
-  	# $canvas->createRectangle(30, 80, 100, 150, -fill => "yellow");
-  	print "count is $count\n";
-	} elsif ($count == 1) {
-  	$canvas->createRectangle(100, 30, 200, 50, -fill => "red");
-  	print "count is $count\n";
+	if ($count == 1) {
+		&Face();
 	} elsif ($count == 2) {
-  	$canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
-  	print "count is $count\n";
+		&Body();
 	} elsif ($count == 3) {
-	 	$canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
-	  print "count is $count\n";
+		&RightArm();
 	} elsif ($count == 4) {
-		$canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
-		print "count is $count\n";
+		&LeftArm();
 	} elsif ($count == 5) {
-		$canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
-		print "count is $count\n";
+		&RightLeg();
 	} elsif ($count == 6) {
-	  $canvas->createRectangle(50, 20, 100, 50, -fill => "cyan");
-	  print "count is $count\n";
+		&LeftLeg();
+
 	}
 }
 
@@ -224,6 +204,37 @@ if ($win == 1){
 	&hangmanDisplay();
 	print("You lose!\n");
 	print("The correct word is: ", $word, "\n");
+}
+
+sub Face {
+	$canvas->createOval(170, 40, 220, 90, -fill => "black");
+	$canvas->createOval(175, 45, 215, 85, -fill => "white");
+	$canvas->createLine(184, 55, 191, 65, -width => 2, -fill => "black");
+	$canvas->createLine(191, 55, 184, 65, -width => 2, -fill => "black");
+	$canvas->createLine(198, 55, 205, 65, -width => 2, -fill => "black");
+	$canvas->createLine(205, 55, 198, 65, -width => 2, -fill => "black");
+	$canvas->createRectangle(184, 74, 205, 75, -fill => "black");
+}
+
+sub Body {
+	$canvas->createRectangle(190, 90, 200, 170, -fill => "black");
+	$canvas->createRectangle(190, 90, 200, 100, -fill => "brown");
+}
+
+sub RightLeg {
+	$canvas->createLine(195, 169, 230, 220, -width => 10, -fill => "black");
+}
+
+sub LeftLeg {
+	$canvas->createLine(195, 169, 160, 220, -width => 10, -fill => "black");
+}
+
+sub RightArm {
+	$canvas->createLine(195, 103, 225, 150, -width => 10, -fill => "black");
+}
+
+sub LeftArm {
+	$canvas->createLine(195, 103, 165, 150, -width => 10, -fill => "black");
 }
 
 
