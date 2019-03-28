@@ -36,6 +36,12 @@ $mw = MainWindow -> new;
 $mw->geometry("450x450");
 $mw->title("Hangman");
 
+#! /usr/bin/perl
+# Initiate the dictionary
+# my $size = `wc -l dictionary.txt`;
+my $size = 20;
+#$size =~ s/\D//g;
+$mw -> Label(-text => "The size of the file is $size")->pack();
 
 $canvas = $mw->Canvas(-relief => "sunken", -background => "lightblue");
 $canvas->pack();
@@ -46,23 +52,12 @@ $canvas->createLine(100, 15, 15, 100, -width => 10, -fill => "brown");
 $canvas->createRectangle(190, 40, 200, 20, -fill => "brown");
 $canvas->createRectangle(10, 240, 370, 260, -fill => "brown");
 
-
-#! /usr/bin/perl
-# Initiate the dictionary
-# my $size = `wc -l dictionary.txt`;
-my $size = 20;
-#$size =~ s/\D//g;
-$mw -> Label(-text => "The size of the file is $size")->pack();
-
-
 sub GUI {
 	$LettersGuessed = $mw->Label(-text => "Letters Guessed: @letters_guessed")->pack();
 
 	$GuessList = $mw->Label(-text => "$guess")->pack();
 
 	$CounterLabel = $mw->Label(-text => "Count: $count")->pack();
-
-
 
 ###############################
 #My Issue is I kind of got the GUI working. You made it so that once the button is clicked, it will push the letter into the $letter.
