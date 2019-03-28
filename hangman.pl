@@ -33,8 +33,30 @@ my $CounterLabel;
 my $MatchLabel;
 
 $mw = MainWindow -> new;
-$mw->geometry("500x500");
+$mw->geometry("450x450");
 $mw->title("Hangman");
+
+
+$canvas = $mw->Canvas(-relief => "sunken", -background => "lightblue");
+$canvas->pack();
+
+$canvas->createRectangle(10, 10, 20, 260, -fill => "black");
+$canvas->createRectangle(10, 20, 200, 10, -fill => "black");
+$canvas->createLine(100, 15, 15, 100, -width => 10, -fill => "brown");
+$canvas->createRectangle(190, 40, 200, 20, -fill => "brown");
+$canvas->createRectangle(10, 240, 370, 260, -fill => "brown");
+
+
+
+
+
+
+
+
+$canvas->createOval(170, 40, 220, 90, -fill => "black");
+$canvas->createOval(175, 45, 215, 85, -fill => "white");
+$canvas->createRectangle(190, 90, 200, 170, -fill => "black");
+
 
 
 #! /usr/bin/perl
@@ -44,6 +66,7 @@ my $size = 20;
 #$size =~ s/\D//g;
 $mw -> Label(-text => "The size of the file is $size")->pack();
 
+
 sub GUI {
 	$LettersGuessed = $mw->Label(-text => "Letters Guessed: @letters_guessed")->pack();
 
@@ -51,8 +74,6 @@ sub GUI {
 
 	$CounterLabel = $mw->Label(-text => "Count: $count")->pack();
 
-	$canvas = $mw->Canvas(-relief => "sunken", -background => "blue");
-	$canvas->pack();
 
 
 ###############################
@@ -133,7 +154,7 @@ sub CheckLetter {
 
 sub hangmanDisplay{
   if ($count == 0) {
-  	$canvas->createRectangle(30, 80, 100, 150, -fill => "yellow");
+  	# $canvas->createRectangle(30, 80, 100, 150, -fill => "yellow");
   	print "count is $count\n";
 	} elsif ($count == 1) {
   	$canvas->createRectangle(100, 30, 200, 50, -fill => "red");
