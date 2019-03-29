@@ -2,6 +2,15 @@ use Tk;
 use strict;
 use warnings;
 
+
+######################
+##############################
+# Check line 303.
+################
+##########################
+##########################
+###################
+
 my @dict;
 my $length;
 my $word_index;
@@ -10,10 +19,13 @@ my $word_length;
 my $guess;
 my $letter;
 my $i;
-my $count = 0;
-my $match = 0;
-my $win = 0;
+my $count;
+my $match;
+my $win;
 my @letters_guessed;
+my $subwin1;
+my $Won = 0;
+my $Lost = 0;
 
 
 #GUI Window. Must have TK.
@@ -32,40 +44,44 @@ my $canvas;
 my $CounterLabel;
 my $MatchLabel;
 
-$mw = MainWindow -> new;
-$mw->geometry("450x450");
-$mw->title("Hangman");
+
 
 #! /usr/bin/perl
 # Initiate the dictionary
 # my $size = `wc -l dictionary.txt`;
-my $size = 20;
-#$size =~ s/\D//g;
-$mw -> Label(-text => "The size of the file is $size")->pack();
+my $size = 10000;
+# $size =~ s/\D//g;
 
-$canvas = $mw->Canvas(-relief => "sunken", -background => "lightblue");
-$canvas->pack();
+&MainStart();
 
-$canvas->createRectangle(10, 10, 20, 260, -fill => "black");
-$canvas->createRectangle(10, 20, 200, 10, -fill => "black");
-$canvas->createLine(100, 15, 15, 100, -width => 10, -fill => "brown");
-$canvas->createRectangle(190, 40, 200, 20, -fill => "brown");
-$canvas->createRectangle(10, 240, 370, 260, -fill => "brown");
+sub MainStart {
+
+	$count = 0;
+	$match = 0;
+	$win = 0;
+	@letters_guessed = ();
+
+	$mw = MainWindow -> new;
+	$mw->geometry("420x450");
+	$mw->title("Hangman");
+	$mw -> Label(-text => "The size of the file is $size")->pack();
+
+	$canvas = $mw->Canvas(-relief => "sunken", -background => "lightblue");
+	$canvas->pack();
+	$canvas->createRectangle(10, 10, 20, 260, -fill => "black");
+	$canvas->createRectangle(10, 20, 200, 10, -fill => "black");
+	$canvas->createLine(100, 15, 15, 100, -width => 10, -fill => "brown");
+	$canvas->createRectangle(190, 40, 200, 20, -fill => "brown");
+	$canvas->createRectangle(10, 240, 370, 260, -fill => "brown");
 
 sub GUI {
 	$LettersGuessed = $mw->Label(-text => "Letters Guessed: @letters_guessed")->pack();
-
 	$GuessList = $mw->Label(-text => "$guess")->pack();
-
 	$CounterLabel = $mw->Label(-text => "Count: $count")->pack();
+	$mw->Label(-text => "You can Type or Press the letters.")->pack();
 
-###############################
-#My Issue is I kind of got the GUI working. You made it so that once the button is clicked, it will push the letter into the $letter.
-#But I cant figure out why it wont run the #CheckLetter sub function
-#Perhaps it is and im stuck on the wrong thing.
-#either way, It doesnt update the counter. So it always just keeps drawing the circle.
-#anythoughts?
-###############################
+	$mw->bind('<KeyPress>' => \&KeyPress);
+
 	my $A = $mw->Button(-text => "A", -command => [\&letter, 'a'])->pack(-side => 'left');
 	my $B = $mw->Button(-text => "B", -command => [\&letter, 'b'])->pack(-side => 'left');
 	my $C = $mw->Button(-text => "C", -command => [\&letter, 'c'])->pack(-side => 'left');
@@ -92,17 +108,79 @@ sub GUI {
 	my $X = $mw->Button(-text => "Y", -command => [\&letter, 'y'])->pack(-side => 'left');
 	my $Y = $mw->Button(-text => "X", -command => [\&letter, 'x'])->pack(-side => 'left');
 	my $Z = $mw->Button(-text => "Z", -command => [\&letter, 'z'])->pack(-side => 'left');
-
 }
 
+# Check if the Key press is a valid letter.
+sub KeyPress {
+
+	my $widget = shift;
+
+  my $e = $widget->XEvent;
+  my ($keysym_text) = ($e->K);
+
+	if ($keysym_text eq 'a' || $keysym_text eq 'A') {
+		&letter('a');
+	} elsif ($keysym_text eq 'b' || $keysym_text eq 'B') {
+		&letter('b');
+	} elsif ($keysym_text eq 'c' || $keysym_text eq 'C') {
+		&letter('c');
+	} elsif ($keysym_text eq 'd' || $keysym_text eq 'D') {
+		&letter('d');
+	} elsif ($keysym_text eq 'e' || $keysym_text eq 'E') {
+		&letter('e');
+	} elsif ($keysym_text eq 'f' || $keysym_text eq 'F') {
+		&letter('f');
+	} elsif ($keysym_text eq 'g' || $keysym_text eq 'G') {
+		&letter('g');
+	} elsif ($keysym_text eq 'h' || $keysym_text eq 'H') {
+		&letter('h');
+	} elsif ($keysym_text eq 'i' || $keysym_text eq 'I') {
+		&letter('i');
+	} elsif ($keysym_text eq 'j' || $keysym_text eq 'J') {
+		&letter('j');
+	} elsif ($keysym_text eq 'k' || $keysym_text eq 'K') {
+		&letter('k');
+	} elsif ($keysym_text eq 'l' || $keysym_text eq 'L') {
+		&letter('l');
+	} elsif ($keysym_text eq 'm' || $keysym_text eq 'M') {
+		&letter('m');
+	} elsif ($keysym_text eq 'n' || $keysym_text eq 'N') {
+		&letter('n');
+	} elsif ($keysym_text eq 'o' || $keysym_text eq 'O') {
+		&letter('o');
+	} elsif ($keysym_text eq 'p' || $keysym_text eq 'P') {
+		&letter('p');
+	} elsif ($keysym_text eq 'q' || $keysym_text eq 'Q') {
+		&letter('q');
+	} elsif ($keysym_text eq 'r' || $keysym_text eq 'R') {
+		&letter('r');
+	} elsif ($keysym_text eq 's' || $keysym_text eq 'S') {
+		&letter('s');
+	} elsif ($keysym_text eq 't' || $keysym_text eq 'T') {
+		&letter('t');
+	} elsif ($keysym_text eq 'u' || $keysym_text eq 'U') {
+		&letter('u');
+	} elsif ($keysym_text eq 'v' || $keysym_text eq 'V') {
+		&letter('v');
+	} elsif ($keysym_text eq 'w' || $keysym_text eq 'W') {
+		&letter('w');
+	} elsif ($keysym_text eq 'x' || $keysym_text eq 'X') {
+		&letter('x');
+	} elsif ($keysym_text eq 'y' || $keysym_text eq 'Y') {
+		&letter('y');
+	} elsif ($keysym_text eq 'z' || $keysym_text eq 'Z') {
+		&letter('z');
+	}
+}
 
 # Letter Button takes a letter as a parameter
-sub letter{
+sub letter {
 	$letter = $_[0];
 	&CheckLetter();
 	&hangmanDisplay();
 }
 
+#Compares the letter guessed with whether it is in the word or not.
 sub CheckLetter {
 	if (&check_guessed($letter, join("", @letters_guessed))){
 		$LettersGuessed -> configure(-text => "Letters Guessed: @letters_guessed");
@@ -131,11 +209,15 @@ sub CheckLetter {
 		$match = 0;
 		if ($word eq $guess){
 			$win = 1;
+			&Winner();
 		}
 	}
 }
 
-sub hangmanDisplay{
+# Depending on the count, a body part will show for Hangman.
+# https://docstore.mik.ua/orelly/perl3/tk/ch02_01.htm
+# Geometry Pack Guide.
+sub hangmanDisplay {
 	if ($count == 1) {
 		&Face();
 	} elsif ($count == 2) {
@@ -148,25 +230,77 @@ sub hangmanDisplay{
 		&RightLeg();
 	} elsif ($count == 6) {
 		&LeftLeg();
-
+			$count = 0;
+			$Lost = $Lost + 1;
+			$subwin1 = $mw->Toplevel;
+			$subwin1->title("Loser!!!");
+			$subwin1->geometry("250x110");
+			$subwin1 ->Label(-text => "Oops.")->pack();
+			$subwin1 ->Label(-text => "Hangman is now Hung.")->pack();
+			$subwin1 ->Label(-text => "Would you like to try again?")->pack();
+			my $button1 = $subwin1->Button(-text => "Yes", -command => \&Restart)->pack();
+			$subwin1->Button(-text => "No", -command => \&Exit)->pack();
 	}
 }
+
+
+#Window that shows when the player wins.
+sub Winner {
+		$Won = $Won + 1;
+		$subwin1 = $mw->Toplevel;
+		$subwin1->title("Winner!!!");
+		$subwin1->geometry("250x110");
+		$subwin1 ->Label(-text => "You saved Hangman from certain death!")->pack();
+		$subwin1 ->Label(-text => "Would you like to save him again?")->pack();
+		my $button1 = $subwin1->Button(-text => "Yes", -command => \&Restart)->pack();
+		$subwin1->Button(-text => "No", -command => \&Exit)->pack();
+}
+
+# Restart the game.
+sub Restart {
+	$mw -> destroy;
+	&MainStart();
+}
+
+
+# Exit the game.
+sub Exit {
+	$subwin1 = $mw->Toplevel;
+	$subwin1->title("Summary");
+	$subwin1->geometry("250x110");
+	$subwin1 ->Label(-text => "You saved Hangman $Won times!" )->pack();
+	$subwin1 ->Label(-text =>  "You also killed Hangman $Lost times!" )->pack();
+	$subwin1 ->Label(-text => "See You Next Time!" )->pack();
+	my $button1 = $subwin1->Button(-text => "Close", -command => \&Close)->pack();
+
+	sub Close {
+		$mw -> destroy;
+	}
+}
+
 
 # Choose the target word
 $word_index = int(rand($size));
 
 $word = &fetch_word($word_index);
 chop($word);
-chop($word);
 $word_length = length($word);
 $guess = "_" x $word_length;
 if (index($word, "'") != -1){
 	substr($guess, index($word, "'"), 1, "'");
 }
-print($guess, "\n");
+
+print $word;
+print "\n";
 
 
-
+######################
+##############################
+# Do we still need this?
+####################
+##########################
+##########################
+###################
 sub fetch_word {
 	open(DICT, "dictionary.txt") or die "Could not open file: $!";
 	my $target = <DICT>;
@@ -191,15 +325,7 @@ sub check_guessed {
 	$guessed;
 }
 
-	&GUI();
-
-if ($win == 1){
-	print("You win!\n");
-	} else {
-	&hangmanDisplay();
-	print("You lose!\n");
-	print("The correct word is: ", $word, "\n");
-}
+&GUI();
 
 sub Face {
 	$canvas->createOval(170, 40, 220, 90, -fill => "black");
@@ -232,8 +358,9 @@ sub LeftArm {
 	$canvas->createLine(195, 103, 165, 150, -width => 10, -fill => "black");
 }
 
+}
 
-	MainLoop;
+MainLoop;
 
 	#Hangman
 	#
