@@ -1,15 +1,8 @@
+#! /usr/bin/perl
+
 use Tk;
 use strict;
 use warnings;
-
-
-######################
-##############################
-# Check line 303.
-################
-##########################
-##########################
-###################
 
 my @dict;
 my $length;
@@ -45,8 +38,6 @@ my $CounterLabel;
 my $MatchLabel;
 
 
-
-#! /usr/bin/perl
 # Initiate the dictionary
 # my $size = `wc -l dictionary.txt`;
 my $size = 10000;
@@ -112,65 +103,10 @@ sub GUI {
 
 # Check if the Key press is a valid letter.
 sub KeyPress {
-
 	my $widget = shift;
-
-  my $e = $widget->XEvent;
-  my ($keysym_text) = ($e->K);
-
-	if ($keysym_text eq 'a' || $keysym_text eq 'A') {
-		&letter('a');
-	} elsif ($keysym_text eq 'b' || $keysym_text eq 'B') {
-		&letter('b');
-	} elsif ($keysym_text eq 'c' || $keysym_text eq 'C') {
-		&letter('c');
-	} elsif ($keysym_text eq 'd' || $keysym_text eq 'D') {
-		&letter('d');
-	} elsif ($keysym_text eq 'e' || $keysym_text eq 'E') {
-		&letter('e');
-	} elsif ($keysym_text eq 'f' || $keysym_text eq 'F') {
-		&letter('f');
-	} elsif ($keysym_text eq 'g' || $keysym_text eq 'G') {
-		&letter('g');
-	} elsif ($keysym_text eq 'h' || $keysym_text eq 'H') {
-		&letter('h');
-	} elsif ($keysym_text eq 'i' || $keysym_text eq 'I') {
-		&letter('i');
-	} elsif ($keysym_text eq 'j' || $keysym_text eq 'J') {
-		&letter('j');
-	} elsif ($keysym_text eq 'k' || $keysym_text eq 'K') {
-		&letter('k');
-	} elsif ($keysym_text eq 'l' || $keysym_text eq 'L') {
-		&letter('l');
-	} elsif ($keysym_text eq 'm' || $keysym_text eq 'M') {
-		&letter('m');
-	} elsif ($keysym_text eq 'n' || $keysym_text eq 'N') {
-		&letter('n');
-	} elsif ($keysym_text eq 'o' || $keysym_text eq 'O') {
-		&letter('o');
-	} elsif ($keysym_text eq 'p' || $keysym_text eq 'P') {
-		&letter('p');
-	} elsif ($keysym_text eq 'q' || $keysym_text eq 'Q') {
-		&letter('q');
-	} elsif ($keysym_text eq 'r' || $keysym_text eq 'R') {
-		&letter('r');
-	} elsif ($keysym_text eq 's' || $keysym_text eq 'S') {
-		&letter('s');
-	} elsif ($keysym_text eq 't' || $keysym_text eq 'T') {
-		&letter('t');
-	} elsif ($keysym_text eq 'u' || $keysym_text eq 'U') {
-		&letter('u');
-	} elsif ($keysym_text eq 'v' || $keysym_text eq 'V') {
-		&letter('v');
-	} elsif ($keysym_text eq 'w' || $keysym_text eq 'W') {
-		&letter('w');
-	} elsif ($keysym_text eq 'x' || $keysym_text eq 'X') {
-		&letter('x');
-	} elsif ($keysym_text eq 'y' || $keysym_text eq 'Y') {
-		&letter('y');
-	} elsif ($keysym_text eq 'z' || $keysym_text eq 'Z') {
-		&letter('z');
-	}
+	my $e = $widget->XEvent;
+  	my ($keysym_text) = ($e->K);
+	&letter(lc($keysym_text));
 }
 
 # Letter Button takes a letter as a parameter
@@ -193,10 +129,10 @@ sub CheckLetter {
 
 		for ($i = 0; $i < $word_length; $i++){
 			if ($letter eq substr($word, $i, 1)){
-				substr($guess, $i, 1, $letter);
+				substr($guess, 2*$i, 1, $letter);
 				$match = 1;
 			} elsif (uc($letter) eq substr($word, $i, 1)) {
-				substr($guess, $i, 1, uc($letter));
+				substr($guess, 2*$i, 1, uc($letter));
 				$match = 1;
 			}
 		}
@@ -243,7 +179,6 @@ sub hangmanDisplay {
 	}
 }
 
-
 #Window that shows when the player wins.
 sub Winner {
 		$Won = $Won + 1;
@@ -278,29 +213,23 @@ sub Exit {
 	}
 }
 
-
 # Choose the target word
 $word_index = int(rand($size));
 
 $word = &fetch_word($word_index);
 chop($word);
+chop($word);
 $word_length = length($word);
-$guess = "_" x $word_length;
+$guess = "_ " x $word_length;
+chop($guess);
 if (index($word, "'") != -1){
 	substr($guess, index($word, "'"), 1, "'");
 }
 
-print $word;
-print "\n";
+print($word, "\n");
+print("The length of the word is: ", $word_length);
 
-
-######################
-##############################
-# Do we still need this?
-####################
-##########################
-##########################
-###################
+# Fetch the target word from the dictionary
 sub fetch_word {
 	open(DICT, "dictionary.txt") or die "Could not open file: $!";
 	my $target = <DICT>;
