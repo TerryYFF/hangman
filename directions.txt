@@ -1,0 +1,24 @@
+(How to install Perl on Windows)
+Install Strawberry Perl from http://strawberryperl.com/
+
+
+Common Program:
+Before executing the hangman program, one needs to have dictionary.txt in the same directory.
+Also, make sure to install the Tk module from cpan.
+In order to do this, open Command Prompt and type:
+	C:\> cpan Tk
+To run the executable program open the Strawberry Perl Terminal.
+	C:\> perl hangman.pl
+Expect the GUI to pop up.
+Enjoy the game.
+
+Creative Program:
+Before executing the hyPERLinks program, one needs to have a pdf file in the same directory.
+Then install the CAM::PDF moduel from cpan
+In order to do this, open Command Prompt and type:
+	C:\> cpan CAM::PDF
+To run the executable program.
+	C:\> perl hyPERLinks.pl <file.pdf>
+Expect the following output.
+	done
+A txt file and an html file will be created in the same directory.
