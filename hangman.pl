@@ -53,8 +53,8 @@ sub MainStart {
 	$guess2 = " " x $word_length;
 	chop($guess);
 	if (index($word, "'") != -1){
-		substr($guess, index($word, "'"), 1, "'");
-		substr($guess2, index($word, "''"), 1, "''");
+		substr($guess, 2*index($word, "'"), 1, "'");
+		substr($guess2, index($word, "'"), 1, "'");
 	}
 
 	$count = 0;

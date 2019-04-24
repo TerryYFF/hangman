@@ -1,0 +1,73 @@
+Terry
+
+Schwartz, Randal L. Learning Perl. OReilly, 1994.
+
+“Perl.” Wikipedia, Wikimedia Foundation, 19 Apr. 2019, en.wikipedia.org/wiki/Perl.
+
+PERL -- Practical Extraction and Report Language, www.cs.cmu.edu/htbin/perl-man.
+
+“Using Perl's Local::Lib for Perl Modules.” Using Perl's Local::Lib for Perl Modules | Stanford Research Computing Center, srcc.stanford.edu/farmshare2/software-perllocallib.
+
+“Perlbrew.” Perlbrew, perlbrew.pl/.
+
+Rezić, Slaven. “Tk::UserGuide.” Tk::UserGuide - Writing Tk Applications in Perl 5, 26 Aug. 2017, metacpan.org/pod/Tk::UserGuide.
+
+Szabgab. “Slurp Mode - Reading a File in One Step.” Perl Maven, perlmaven.com/slurp.
+
+Simms, Steve. “PDF::API2.” PDF::API2 - Facilitates the Creation and Modification of PDF Files, 7 July 2017, metacpan.org/pod/PDF::API2.
+
+“CAM-PDF.” Search the CPAN, metacpan.org/release/CAM-PDF.
+
+“External Programs.” Perl 101: Things Every Perl Programmer Should Know., perl101.org/external-programs.html.
+
+Purcell, John. “Perl File Open: Creating, Reading and Writing to Files in Perl.” Cave of Programming, caveofprogramming.com/perl-tutorial/perl-file-open-creating-reading-and-writing-to-files-in-perl.html.
+
+CAM::PDF Extract Text and Their Coordinates from Pdf.., www.perlmonks.org/?node_id=1012402.
+
+Yahoo! Groups, Yahoo!, groups.yahoo.com/neo/groups/perl-text-pdf-modules/conversations/topics/1027.
+
+Anyone Know How to Add a Hyperlink with PDF::API2, www.perlmonks.org/?node_id=1067537.
+
+Purdue Writing Lab. “General Format // Purdue Writing Lab.” Purdue Writing Lab, owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_general_format.html.
+
+
+Itaru
+
+Banas, Derek. “Perl Tutorial.” YouTube, YouTube, 28 Mar. 2016, www.youtube.com/watch?v=WEghIXs8F6c. (56:01 min)
+
+Perl Programming Documentation, perldoc.perl.org/index.html.
+
+Search and Extract Lines Which Contain a Word, www.perlmonks.org/?node_id=676354.
+
+Use Module If Condition Is Met, www.perlmonks.org/?node_id=323606.
+Tk::Button: How Do I Trigger a Callback When Button Is Pressed (as Opposed to Released)?, www.perlmonks.org/?node_id=1010305.
+
+Keyboard Input with Perl/Tk's -Bind(), www.perlmonks.org/?node_id=144722.
+
+Szabgab. “Installing a Perl Module from CPAN on Windows, Linux and Mac OSX.” Perl Maven, perlmaven.com/how-to-install-a-perl-module-from-cpan.
+
+Szabgab. “Perl Split - to Cut up a String into Pieces.” Perl Maven, perlmaven.com/perl-split.
+
+Szabgab. “Subroutines and Functions in Perl.” Perl Maven, perlmaven.com/subroutines-and-functions-in-perl.
+
+Szabgab. “Open and Read from Text Files.” Perl Maven, perlmaven.com/open-and-read-from-files.
+
+Szabgab. “Running External Programs from Perl with System.” Perl Maven, perlmaven.com/running-external-programs-from-perl.
+
+Szabgab. “Use Path::Tiny to Read and Write File.” Perl Maven, perlmaven.com/use-path-tiny-to-read-and-write-file.
+
+Szabgab. “Slurp Mode - Reading a File in One Step.” Perl Maven, perlmaven.com/slurp.
+
+“The Basics of Perl/Tk.” Learn the Perl/Tk Module, Part 1, 16 Oct. 2007, www.ibm.com/developerworks/aix/library/au-perltkmodule/index.html.
+
+“Writing GUI Applications in Perl/Tk.” Perl.com - Programming News, Code and Culture, 3 Mar. 2001, www.perl.com/pub/2001/03/gui.html/.
+
+“Mastering Perl/Tk.” Geometry Management (Mastering Perl/Tk), docstore.mik.ua/orelly/perl3/tk/ch02_01.htm.
+
+Rezić, Slaven. “Tk::UserGuide.” Tk::UserGuide - Writing Tk Applications in Perl 5, 26 Aug. 2017, metacpan.org/pod/Tk::UserGuide.
+Purcell, John. “Online Courses - Learn Perl 5 By Doing It.” Udemy, www.udemy.com/perltutorial/learn/lecture/226013?start=75#overview.
+
+	Section 1: Basic Perl: Getting Started
+	Section 2: More on Reading Files Live By Line: Tips, Tricks and Vital Knowledge
+	Section 3: Web Scraping and More Regular Expressions
+	Section 7: Perl One-Liners
