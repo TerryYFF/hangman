@@ -1,5 +1,7 @@
 #! /usr/bin/perl
 
+# Please comment out line 50 if you are a Windows user
+
 use Tk;
 use strict;
 use warnings;
@@ -38,20 +40,20 @@ sub MainStart {
 	open(my $fh, '<', 'dictionary.txt') or die "Unable to open file, $!";
 	my @dict = <$fh>; # Slurp!
 	close($fh) or warn "Unable to close the file handle: $!";
+	# Get the size of the dictionary
 	$size = @dict;
 
 	# Randomly choose the target word
 	$word_index = int(rand($size));
 	$word = $dict[$word_index];
 	chop($word);
-	# Please uncomment the line below if you are a Linux user
-	# chop($word);
+	chop($word);
 	$word_length = length($word);
-	# print("The target word is $word\n");
 
 	$guess = "_ " x $word_length;
 	$guess2 = " " x $word_length;
 	chop($guess);
+	# Reveal the position of the apostrophe
 	if (index($word, "'") != -1){
 		substr($guess, 2*index($word, "'"), 1, "'");
 		substr($guess2, index($word, "'"), 1, "'");
@@ -82,6 +84,7 @@ sub MainStart {
 		$mw->Label(-text => "You can Type or Press the letters.")->pack();
 		$mw->bind('<KeyPress>' => \&KeyPress);
 
+		# Show buttons A-Z
 		my $A = $mw->Button(-text => "A", -command => [\&letter, 'a'])->pack(-side => 'left');
 		my $B = $mw->Button(-text => "B", -command => [\&letter, 'b'])->pack(-side => 'left');
 		my $C = $mw->Button(-text => "C", -command => [\&letter, 'c'])->pack(-side => 'left');
@@ -127,15 +130,18 @@ sub MainStart {
 
 	#Compares the letter guessed with whether it is in the word or not.
 	sub CheckLetter {
+		# Check if the input letter has already been guessed
 		if (&check_guessed($letter, join("", @letters_guessed))){
 			$LettersGuessed -> configure(-text => "Letters Guessed: @letters_guessed");
 			$GuessList -> configure(-text => "$guess");
 			$CounterLabel -> configure(-text => "Count: $count");
 		} else {
+			# Add the input letter into the list of guessed letters
 			push(@letters_guessed, $letter);
 			@letters_guessed = sort(@letters_guessed);
 			$LettersGuessed -> configure(-text => "Letters Guessed: @letters_guessed");
 
+			# Reveal the letter being guessed
 			for ($i = 0; $i < $word_length; $i++){
 				if ($letter eq substr($word, $i, 1)){
 					substr($guess, 2*$i, 1, $letter);
@@ -149,11 +155,15 @@ sub MainStart {
 			}
 
 			$GuessList -> configure(-text => "$guess");
+
+			# Update the number of guess chances left
 			if ($match == 0) {
 				$count++;
 			}
 			$CounterLabel -> configure(-text => "Count: $count");
 			$match = 0;
+
+			# Check if the player wins the game
 			if ($word eq $guess2){
 				$win = 1;
 				&Winner();
@@ -162,8 +172,6 @@ sub MainStart {
 	}
 
 	# Depending on the count, a body part will show for Hangman.
-	# https://docstore.mik.ua/orelly/perl3/tk/ch02_01.htm
-	# Geometry Pack Guide.
 	sub hangmanDisplay {
 		if ($count == 1) {
 			&Face();
@@ -240,6 +248,7 @@ sub MainStart {
 
 	&GUI();
 
+	# Draw the face of the hangman
 	sub Face {
 		$canvas->createOval(170, 40, 220, 90, -fill => "black");
 		$canvas->createOval(175, 45, 215, 85, -fill => "white");
@@ -250,23 +259,28 @@ sub MainStart {
 		$canvas->createRectangle(184, 74, 205, 75, -fill => "black");
 	}
 
+	# Draw the body of the hangman
 	sub Body {
 		$canvas->createRectangle(190, 90, 200, 170, -fill => "black");
 		$canvas->createRectangle(190, 90, 200, 100, -fill => "brown");
 	}
 
+	# Draw the right leg of the hangman
 	sub RightLeg {
 		$canvas->createLine(195, 169, 230, 220, -width => 10, -fill => "black");
 	}
 
+	# Draw the left leg of the hangman
 	sub LeftLeg {
 		$canvas->createLine(195, 169, 160, 220, -width => 10, -fill => "black");
 	}
 
+	# Draw the right arm of the hangman
 	sub RightArm {
 		$canvas->createLine(195, 103, 225, 150, -width => 10, -fill => "black");
 	}
 
+	# Draw the left arm of the hangman
 	sub LeftArm {
 		$canvas->createLine(195, 103, 165, 150, -width => 10, -fill => "black");
 	}
