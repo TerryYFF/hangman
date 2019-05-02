@@ -1,24 +1,45 @@
-(How to install Perl on Windows)
-Install Strawberry Perl from http://strawberryperl.com/
+For MacOS or Linux/Unix users, Perl has already been installed.
+If you also have CPAN installed, please jump ahead to the "Commpn Program" Section.
+
+Perlbrew:
+I used Perlbrew, a perl installation management tool, on my Macbook.
+(https://perlbrew.pl/)
+To install Perlbrew, copy & paste the following command into your termina:
+	\curl -L https://install.perlbrew.pl | bash
+To initialize Perlbrew:
+	source ~/perl5/perlbrew/etc/bashrc
+To install a specific version of perl (e.g. v5.28.1):
+	perlbrew install perl-5.28.1
+	perlbrew switch perl-5.28.1
+To install CPAN:
+	curl -kL http://cpanmin.us | perl - App::cpanminus
+To install a specific CPAN module (e.g. Tk):
+	cpanm Tk
+
+* If you're not using CPAN installed by perlbrew, the module installation command would be different:
+	cpan Tk
 
 
 Common Program:
 Before executing the hangman program, one needs to have dictionary.txt in the same directory.
 Also, make sure to install the Tk module from cpan.
-In order to do this, open Command Prompt and type:
-	C:\> cpan Tk
-To run the executable program open the Strawberry Perl Terminal.
-	C:\> perl hangman.pl
+In order to do this, in your terminal type:
+	cpanm Tk
+To run the executable program:
+	perl hangman.pl
 Expect the GUI to pop up.
 Enjoy the game.
 
+
 Creative Program:
-Before executing the hyPERLinks program, one needs to have a pdf file in the same directory.
-Then install the CAM::PDF moduel from cpan
-In order to do this, open Command Prompt and type:
-	C:\> cpan CAM::PDF
-To run the executable program.
-	C:\> perl hyPERLinks.pl <file.pdf>
-Expect the following output.
-	done
+Before executing the hyPERLinks program, one needs to have a pdf file or a text file in the same directory.
+Then install the CAM::PDF module and the LWP::Simple module from cpan
+In order to do these, in your terminal type:
+	cpanm CAM::PDF
+	cpanm LWP::Simple
+To run the executable program:
+	perl hyPERLinks.pl <file.pdf>
 A txt file and an html file will be created in the same directory.
+Or:
+	perl hyPERLinks.pl <file.txt>
+An html file will be created in the same directory.
